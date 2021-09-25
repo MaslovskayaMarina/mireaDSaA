@@ -1,6 +1,7 @@
 ﻿#include <iostream>
 #include <string>
 #include <list>
+#include <typeinfo>
 
 using namespace std;
 
@@ -18,7 +19,7 @@ public:
         return o_article;
     }
 
-private:
+public:
     string o_name;
     int o_article;
 };
@@ -55,16 +56,16 @@ public:
         // индексу, вычисленному хэш-функцией (с учётом смещения)
         m_hash_table[hasher(id) - min_hash_value].push_back(id.getArticle());
     }
-
+    
     void showTable() {
-        list<hashObject>::iterator it
 
         cout << "--------------------------" << endl;
-        cout << "key    values" << endl;
-        for (int i = min_hash_value; i <= max_hash_value; i++) {
+        cout << "hash    values" << endl;
+        for (int i = 0; i < 131; i++) {
             if (this->m_hash_table[i].empty() == false) {
                 // todo: вывод всех элементов
 
+                cout << endl;
             }
         }
     }
@@ -92,6 +93,14 @@ int main()
     cout << ht.m_hash_table[194 - 113].back() << endl;
 
     cout << endl;
+
+    //cout << ht.m_hash_table[131].front() << endl;
+    cout << typeid(ht.m_hash_table[194 - 113].back()).name() << endl;
+    //ht.showTable();
+    cout << ht.m_hash_table[0].empty() << endl;
+
+    cout << endl;
+
     ht.showTable();
 
     return 0;
